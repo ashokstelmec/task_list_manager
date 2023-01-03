@@ -4,7 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import Dialog from "./Dialog";
 import { AUTH_TOKEN } from "../utils";
 
-const Task = ({ item, handleDelete, getTasksLists, users  }) => {
+const Task = ({ item, handleDelete, getTasksLists, users }) => {
   const [openModal, setOpenModal] = useState(false);
   const [task, setTask] = useState({
     message: "",
@@ -51,27 +51,25 @@ const Task = ({ item, handleDelete, getTasksLists, users  }) => {
   // This fn will edit or update in backend
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateTask()
-  }
+    updateTask();
+  };
 
   return (
     <>
-      <table className="displaying-data">
-        <tbody>
-          <tr className="table-row">
-            <td className="message-data">{item.message}</td>
-            <td>{item.assigned_name}</td>
-            <td>{item.priority}</td>
-            <td className="creating-date">{item.created_on}</td>
-            <td className="edit-icon">
-              <FiEdit onClick={onOpenModal} />
-            </td>
-            <td className="delete-icon">
-              <MdOutlineDelete onClick={() => handleDelete(item.id)} />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {item && (
+        <tr className="table-row">
+          <td className="message-data">{item.message}</td>
+          <td>{item.assigned_name}</td>
+          <td>{item.priority}</td>
+          <td className="creating-date">{item.created_on}</td>
+          <td className="edit-icon">
+            <FiEdit onClick={onOpenModal} />
+          </td>
+          <td className="delete-icon">
+            <MdOutlineDelete onClick={() => handleDelete(item.id)} />
+          </td>
+        </tr>
+      )}
 
       <Dialog
         open={openModal}

@@ -8,39 +8,48 @@ const Filters = () => {
   const [filterSelect, setFilterSelect] = useState("all");
 
   useEffect(() => {
-    setOriginalTaskLists(taskLists)
-  }, [])
+    const items = JSON.parse(localStorage.getItem("TASKS"));
+    if (items) {
+      setOriginalTaskLists(items);
+    }
+  }, []);
+  
 
   const handleClick = (type) => {
     setFilterSelect(type);
     if (type === "all") {
-      setTaskLists(OriginalTaskLists)
+      setTaskLists(OriginalTaskLists);
     }
 
     if (type === "high") {
-      const highPriorityTask = taskLists.map((task) => {
+      const highPriorityTask = OriginalTaskLists.filter((task) => {
         if (task.priority === "3") return task;
         return false;
       });
       setTaskLists(highPriorityTask);
+      return;
     }
 
     if (type === "medium") {
-      const mediumPriorityTask = taskLists.map((task) => {
+      const mediumPriorityTask = OriginalTaskLists.filter((task) => {
         if (task.priority === "2") return task;
         return false;
       });
       setTaskLists(mediumPriorityTask);
+      return;
     }
 
     if (type === "low") {
-      const lowPriorityTask = taskLists.map((task) => {
+      const lowPriorityTask = OriginalTaskLists.filter((task) => {
         if (task.priority === "1") return task;
         return false;
       });
       setTaskLists(lowPriorityTask);
+      return;
     }
   };
+  console.log("TaskList", taskLists);
+  console.log("Original Task",  OriginalTaskLists);
 
   return (
     <div className="filters-wrapper">

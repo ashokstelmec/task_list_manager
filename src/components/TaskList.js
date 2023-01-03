@@ -13,8 +13,7 @@ const TaskList = () => {
     priority: "",
   });
 
-  const { taskLists, setTaskLists } = useContext(TaskContext)
-
+  const { taskLists, setTaskLists } = useContext(TaskContext);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -62,6 +61,7 @@ const TaskList = () => {
         requestOptions
       );
       const data = await response.json();
+      localStorage.setItem("TASKS", JSON.stringify(data?.tasks));
       setTaskLists(data?.tasks);
     } catch (error) {
       console.log("Error is ", error);
@@ -143,16 +143,19 @@ const TaskList = () => {
           </button>
         </div>
       </div>
-      {taskLists?.map((taskItem, i) => (
-        <Task
-          key={i}
-          item={taskItem}
-          handleDelete={handleDelete}
-          getTasksLists={getTasksLists}
-          users={users}
-        />
-      ))}
-
+      <table className="displaying-data">
+        <tbody>
+          {taskLists?.map((taskItem, i) => (
+            <Task
+              key={i}
+              item={taskItem}
+              handleDelete={handleDelete}
+              getTasksLists={getTasksLists}
+              users={users}
+            />
+          ))}
+        </tbody>
+      </table>
       <Dialog
         open={open}
         onCloseModal={onCloseModal}
