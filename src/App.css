@@ -61,6 +61,7 @@ header {
   border-radius: 7px;
   font-family: cursive;
   border: 1px solid lightgrey;
+  cursor: pointer;
 }
 
 .sidebar {

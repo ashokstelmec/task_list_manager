@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { FiEdit } from "react-icons/fi";
-import { MdOutlineDelete } from "react-icons/md";
-// import Dialog from "./Dialog";
-import { Modal } from "react-responsive-modal";
-import "react-responsive-modal/styles.css";
-
-const AUTH_TOKEN = "UrM4YHgb1FcqEf1tuKwmAMMX5MxFZ12a";
+import Dialog from "./Dialog";
+import { AUTH_TOKEN } from "../utils";
+import Task from "./Task";
 
 const TaskList = () => {
   const [taskLists, setTaskLists] = useState([]);
   const [open, setOpen] = useState(false);
+  const [task, setTask] = useState({
+    message: "",
+    dueDate: "",
+    assignedTo: "",
+    priority: "",
+  });
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -29,7 +31,6 @@ const TaskList = () => {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
       setTaskLists(data?.tasks);
     } catch (error) {
       console.log("Error is ", error);
@@ -62,6 +63,40 @@ const TaskList = () => {
     }
   };
 
+  const handleChange = (e) => {
+    setTask((oldState) => ({ ...oldState, [e.target.name]: e.target.value }));
+  };
+
+  const addNewTask = async () => {
+    try {
+      const formdata = new FormData();
+      formdata.append("message", task.message);
+      formdata.append("due_date", task.dueDate);
+      formdata.append("priority", task.priority);
+      formdata.append("assigned_to", task.assignedTo);
+
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          AuthToken: AUTH_TOKEN,
+        },
+        body: formdata,
+        redirect: "follow",
+      };
+
+      await fetch("https://devza.com/tests/tasks/create", requestOptions);
+      getTasksLists();
+    } catch (error) {
+      console.log("Error is ", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // POST REQUEST TO BACKEND.
+    addNewTask();
+  };
+
   return (
     <div className="task-list container">
       <div className="task-list-header">
@@ -77,68 +112,17 @@ const TaskList = () => {
           </button>
         </div>
       </div>
-      {taskLists?.map((el, i) => (
-        <table key={i} className="displaying-data">
-          <tbody>
-            <tr className="table-row">
-              <td className="message-data">{el.message}</td>
-              <td>{el.assigned_name}</td>
-              <td>{el.priority}</td>
-              <td className="creating-date">{el.created_on}</td>
-              <td className="edit-icon">
-                <FiEdit />
-              </td>
-              <td className="delete-icon">
-                <MdOutlineDelete onClick={() => handleDelete(el.id)} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      {taskLists?.map((taskItem, i) => (
+        <Task item={taskItem} handleDelete={handleDelete} getTasksLists={getTasksLists} />
       ))}
-      <Modal
+
+      <Dialog
         open={open}
-        onClose={onCloseModal}
-        classNames={{
-          modal: "customModal",
-        }}
-        center
-      >
-        <p className="create-task">Create/Edit Task</p>
-        <form>
-          <input
-            type="text"
-            placeholder="Enter Your Message"
-            className="enter-your-message"
-          />
-          <div className="dropdown">
-            <div className="dropdown-1">
-              <label>Assign To</label>
-              <select>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
-              </select>
-            </div>
-            <div className="dropdown-1">
-              <label>priority</label>
-              <select>
-                <option></option>
-                <option></option>
-                <option></option>
-              </select>
-            </div>
-          </div>
-          <div className="date-group">
-            <label>Due Date</label>
-            <input type="date" />
-          </div>
-          <button className="btn-add-task">Add Task</button>
-        </form>
-      </Modal>
+        onCloseModal={onCloseModal}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        task={task}
+      />
     </div>
   );
 };
