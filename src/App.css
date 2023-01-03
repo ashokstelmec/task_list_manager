@@ -115,3 +115,106 @@ header {
   border-radius: 20px;
   color: #6e6e6e;
 }
+
+.displaying-data{
+  border: 1px solid gray;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem 1rem;
+  border-radius: 6px;
+}
+
+.table-row{ 
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-row td{
+  margin-left: 2rem;
+  width: 26%;
+}
+
+.message-data{
+  width: 100% !important;
+}
+
+.edit-icon{
+  margin-right: -9rem;
+  margin-left: 13rem !important;
+  font-size: 1.1rem;
+}
+
+.delete-icon{
+  font-size: 1.2rem;
+}
+
+.creating-date{
+  width: 46% !important;
+  /* margin-left: 3rem !important; */
+}
+
+.customModal{
+  padding: 3rem;
+  width: 35%;
+  border-radius: 7px;
+  padding-right: 1.2rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+
+.create-task{
+  margin-top: -1.99rem;
+}
+
+.enter-your-message{
+  padding: 0.5rem;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.dropdown{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dropdown-1{
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.dropdown-1 select{
+  width: 12rem;
+  height: 2rem;
+  border-radius: 5px;
+}
+
+.date-group{
+  margin-top: 2rem;
+  display: grid;
+  grid-gap: 0.7rem;
+}
+
+.date-group input{
+  height: 40px;
+  border-radius: 5px;
+  border-color: lightgray;
+}
+
+.btn-add-task{
+  padding: 0.5rem 1rem;
+  background-color: #3e82c6;
+  border: none;
+  border-radius: 5px;
+  float: right;
+  margin-top: 2rem;
+  color: #fff;
+}
+
+.btn-add-task:hover{
+  cursor: pointer;
+  background-color: #1982ea;
+}
