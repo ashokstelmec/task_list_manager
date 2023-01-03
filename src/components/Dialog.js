@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
-import { AUTH_TOKEN } from "../utils";
 
-const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task, users }) => {
- 
-
+const Dialog = ({
+  open,
+  onCloseModal,
+  handleChange,
+  handleSubmit,
+  task,
+  users,
+}) => {
   return (
     <Modal
       open={open}
@@ -33,7 +36,6 @@ const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task, users })
               value={task.assignedTo}
               onChange={handleChange}
             >
-
               <option value="">Choose User</option>
               {users?.map((user) => (
                 <option value={user.id} key={user.id}>
@@ -49,9 +51,7 @@ const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task, users })
               value={task.priority}
               onChange={handleChange}
             >
-
               <option value="">Choose Priority</option>
-
               <option value="1">Low</option>
               <option value="2">Medium</option>
               <option value="3">High</option>

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Dialog from "./Dialog";
 import { AUTH_TOKEN } from "../utils";
 import Task from "./Task";
+import { TaskContext } from "../context";
 
 const TaskList = () => {
-  const [taskLists, setTaskLists] = useState([]);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState({
     message: "",
@@ -12,6 +12,9 @@ const TaskList = () => {
     assignedTo: "",
     priority: "",
   });
+
+  const { taskLists, setTaskLists } = useContext(TaskContext)
+
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);

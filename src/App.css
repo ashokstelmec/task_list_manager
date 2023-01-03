@@ -71,6 +71,17 @@ header {
   padding-bottom: 20px;
 }
 
+.active {
+  background: #6c9dce;
+  color: #fff !important;
+}
+
+.normal{
+  color: #6e6e6e;
+  background: #fff;;
+
+}
+
 .search {
   border: none;
   border-radius: 1rem;
@@ -115,9 +126,10 @@ header {
   border: 1px solid lightgrey;
   border-radius: 20px;
   color: #6e6e6e;
+  cursor: pointer;
 }
 
-.displaying-data{
+.displaying-data {
   border: 1px solid gray;
   margin-top: 1rem;
   width: 100%;
@@ -125,36 +137,36 @@ header {
   border-radius: 6px;
 }
 
-.table-row{ 
+.table-row {
   display: flex;
   justify-content: space-between;
 }
 
-.table-row td{
+.table-row td {
   margin-left: 2rem;
   width: 26%;
 }
 
-.message-data{
+.message-data {
   width: 100% !important;
 }
 
-.edit-icon{
+.edit-icon {
   margin-right: 6rem;
   margin-left: 13rem !important;
   font-size: 1.1rem;
 }
 
-.delete-icon{
+.delete-icon {
   font-size: 1.2rem;
 }
 
-.creating-date{
+.creating-date {
   width: 46% !important;
   /* margin-left: 3rem !important; */
 }
 
-.customModal{
+.customModal {
   padding: 3rem;
   width: 35%;
   border-radius: 7px;
@@ -163,11 +175,11 @@ header {
   padding-bottom: 1rem;
 }
 
-.create-task{
+.create-task {
   margin-top: -1.99rem;
 }
 
-.enter-your-message{
+.enter-your-message {
   padding: 0.5rem;
   margin-top: 2.2rem;
   margin-bottom: 1rem;
@@ -175,37 +187,37 @@ header {
   border-radius: 5px;
 }
 
-.dropdown{
+.dropdown {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.dropdown-1{
+.dropdown-1 {
   display: grid;
   grid-gap: 1rem;
 }
 
-.dropdown-1 select{
+.dropdown-1 select {
   width: 12rem;
   height: 2rem;
   border-radius: 5px;
 }
 
-.date-group{
+.date-group {
   margin-top: 2rem;
   display: grid;
   grid-gap: 0.7rem;
 }
 
-.date-group input{
+.date-group input {
   height: 40px;
   border-radius: 5px;
   border-color: lightgray;
 }
 
-.btn-add-task{
+.btn-add-task {
   padding: 0.5rem 1rem;
   background-color: #3e82c6;
   border: none;
@@ -215,7 +227,7 @@ header {
   color: #fff;
 }
 
-.btn-add-task:hover{
+.btn-add-task:hover {
   cursor: pointer;
   background-color: #1982ea;
 }
