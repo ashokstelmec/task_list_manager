@@ -35,7 +35,6 @@ const TaskList = () => {
         requestOptions
       );
       const data = await response.json();
-      // console.log("DATAA", data);
       setUsers(data?.users);
     } catch (error) {
       console.log("Error is ", error);

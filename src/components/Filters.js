@@ -48,8 +48,6 @@ const Filters = () => {
       return;
     }
   };
-  console.log("TaskList", taskLists);
-  console.log("Original Task",  OriginalTaskLists);
 
   return (
     <div className="filters-wrapper">
