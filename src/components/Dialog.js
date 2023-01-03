@@ -3,34 +3,8 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import { AUTH_TOKEN } from "../utils";
 
-const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task }) => {
-  const [users, setUsers] = useState([]);
-
-  const getUserList = async () => {
-    try {
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          AuthToken: AUTH_TOKEN,
-        },
-        redirect: "follow",
-      };
-
-      const response = await fetch(
-        "https://devza.com/tests/tasks/listusers",
-        requestOptions
-      );
-      const data = await response.json();
-      console.log(data);
-      //   setUsers(data);
-    } catch (error) {
-      console.log("Error is ", error);
-    }
-  };
-
-  useEffect(() => {
-    getUserList();
-  }, []);
+const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task, users }) => {
+ 
 
   return (
     <Modal
@@ -59,15 +33,13 @@ const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task }) => {
               value={task.assignedTo}
               onChange={handleChange}
             >
-              <option value="a">A</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-              <option value="d">D</option>
-              <option value="e">E</option>
-              <option value="f">F</option>
-              {/* {users.map((user) => (
-                <option>{user}</option>
-              ))} */}
+
+              <option value="">Choose User</option>
+              {users?.map((user) => (
+                <option value={user.id} key={user.id}>
+                  {user.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="dropdown-1">
@@ -77,6 +49,9 @@ const Dialog = ({ open, onCloseModal, handleChange, handleSubmit, task }) => {
               value={task.priority}
               onChange={handleChange}
             >
+
+              <option value="">Choose Priority</option>
+
               <option value="1">Low</option>
               <option value="2">Medium</option>
               <option value="3">High</option>

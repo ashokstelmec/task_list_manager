@@ -4,8 +4,8 @@ import { MdOutlineDelete } from "react-icons/md";
 import Dialog from "./Dialog";
 import { AUTH_TOKEN } from "../utils";
 
-const Task = ({ item, handleDelete, getTasksLists }) => {
-  const [open, setOpen] = useState(false);
+const Task = ({ item, handleDelete, getTasksLists, users  }) => {
+  const [openModal, setOpenModal] = useState(false);
   const [task, setTask] = useState({
     message: "",
     dueDate: "",
@@ -17,8 +17,8 @@ const Task = ({ item, handleDelete, getTasksLists }) => {
     setTask(item);
   }, [item]);
 
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
+  const onOpenModal = () => setOpenModal(true);
+  const onCloseModal = () => setOpenModal(false);
 
   const handleChange = (e) => {
     setTask((oldState) => ({ ...oldState, [e.target.name]: e.target.value }));
@@ -49,7 +49,8 @@ const Task = ({ item, handleDelete, getTasksLists }) => {
   };
 
   // This fn will edit or update in backend
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     updateTask()
   }
 
@@ -73,11 +74,12 @@ const Task = ({ item, handleDelete, getTasksLists }) => {
       </table>
 
       <Dialog
-        open={open}
+        open={openModal}
         onCloseModal={onCloseModal}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         task={task}
+        users={users}
       />
     </>
   );

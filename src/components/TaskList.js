@@ -16,6 +16,34 @@ const TaskList = () => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const [users, setUsers] = useState([]);
+
+  const getUserList = async () => {
+    try {
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          AuthToken: AUTH_TOKEN,
+        },
+        redirect: "follow",
+      };
+
+      const response = await fetch(
+        "https://devza.com/tests/tasks/listusers",
+        requestOptions
+      );
+      const data = await response.json();
+      // console.log("DATAA", data);
+      setUsers(data?.users);
+    } catch (error) {
+      console.log("Error is ", error);
+    }
+  };
+
+  useEffect(() => {
+    getUserList();
+  }, []);
+
   const getTasksLists = async () => {
     try {
       const requestOptions = {
@@ -113,7 +141,13 @@ const TaskList = () => {
         </div>
       </div>
       {taskLists?.map((taskItem, i) => (
-        <Task item={taskItem} handleDelete={handleDelete} getTasksLists={getTasksLists} />
+        <Task
+          key={i}
+          item={taskItem}
+          handleDelete={handleDelete}
+          getTasksLists={getTasksLists}
+          users={users}
+        />
       ))}
 
       <Dialog
@@ -122,6 +156,7 @@ const TaskList = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         task={task}
+        users={users}
       />
     </div>
   );
